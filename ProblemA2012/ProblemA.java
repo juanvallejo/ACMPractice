@@ -20,16 +20,22 @@ public class ProblemA {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filename));
 			String line = br.readLine();
-
 			Case kase = new Case(line);
-			int numWinDoors = kase.getNumWinDoors();
 
-			// read the next n lines from file
-			for(int i = 0; i < numWinDoors; i++) {
-				kase.addWindDoor(br.readLine());
+			while(line != null && kase.isValid()) {
+				
+				int numWinDoors = kase.getNumWinDoors();
+
+				// read the next n lines from file
+				for(int i = 0; i < numWinDoors; i++) {
+					kase.addWindDoor(br.readLine());
+				}
+
+				System.out.println("Total amount of paintcans -> " + kase.getPaintCanNumber());
+
+				line = br.readLine();
+				kase = new Case(line);
 			}
-
-			System.out.println("Total amount of paintcans -> " + kase.getPaintCanNumber());
 
 			br.close();
 		} catch(IOException e) {
@@ -87,6 +93,10 @@ class Case {
 
 	}
 
+	public boolean isValid() {
+		return (this.numRooms != 0 && this.roomWidth != 0 && this.roomLength != 0 && this.roomHeight != 0 && this.paintCanArea != 0);
+	}
+
 	// takes a line of given input, creates a new WinDoor and stores it
 	// in the winDoors ArrayList
 	public void addWindDoor(String lineFromInput) {
@@ -119,8 +129,7 @@ class Case {
 
 	// number of paint cans needed to paint all apartments
 	public int getPaintCanNumber() {
-		System.out.println(this.getTotalArea());
-		return this.getTotalArea() / this.paintCanArea;
+		return (int)(Math.ceil(this.getTotalArea() / this.paintCanArea));
 	}
 
 }
