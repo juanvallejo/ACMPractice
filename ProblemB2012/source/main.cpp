@@ -155,7 +155,6 @@ bool parseInput(std::string filename) {
 	return true;
 }
 
-// TODO iterate through all test cases
 int main() {
 
 	if(!parseInput("input.txt")) {
