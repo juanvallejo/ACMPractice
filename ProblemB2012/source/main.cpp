@@ -20,6 +20,14 @@ std::vector<std::string> split_str(std::string& string, const char delim) {
 
 }
 
+bool sortEngineers(Engineer& engineer1, Engineer& engineer2) {
+	return engineer1.getReviewsLeft() > engineer2.getReviewsLeft();
+}
+
+bool sortComponents(Component& component1, Component& component2) {
+	return component1.getReviewsLeft() > component2.getReviewsLeft();
+}
+
 int parseData(std::vector<Component>& components, std::vector<Engineer>& engineers) {
 
 	int nEng 		= 0;
@@ -28,6 +36,12 @@ int parseData(std::vector<Component>& components, std::vector<Engineer>& enginee
 	int exitCode 	= 0;
 
 	bool done 		= false;
+
+	// sort engineers from greatest reviews to least
+	std::sort(engineers.begin(), engineers.end(), sortEngineers);
+	std::sort(components.begin(), components.end(), sortComponents);
+
+	// sort components from greatest reviews to least
 
 	// iterate through each engineer, reviewing each component if possible
 	for(; nEng < engineers.size() && !done; nEng++) {
