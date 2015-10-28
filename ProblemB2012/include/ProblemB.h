@@ -59,7 +59,7 @@ class Engineer {
 		 * An engineer can review a component only
 		 * if that component is not in the vector of
 		 * componentsReviewed and that component has
-		 * reviews left
+		 * reviews left, and the engineer has reviews left
 		 */
 		bool canReview(Component&);
 
